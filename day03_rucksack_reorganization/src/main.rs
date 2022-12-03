@@ -1,4 +1,4 @@
-use std::{fs::File, io::{self, BufRead}, collections::HashSet, ops::Index, hash::Hash};
+use std::{fs::File, io::{self, BufRead}, collections::HashSet};
 
 fn read_input(path: &str) -> Vec<String> {
     let file = File::open(path).unwrap();
