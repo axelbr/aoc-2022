@@ -142,5 +142,4 @@ fn main() {
         }
     }
     println!("[Task 2] Max scenic score: {}", max_scenic_score);
-
 }
