@@ -13,18 +13,7 @@ fn load_map(path: &str) -> Map {
     return map;
 }
 
-fn transpose(map: &Map) -> Map {
-    let mut columns: Map = (0..map.len()).map(|_| Vec::new()).collect();
-    for row in map {
-        for (j, elem) in row.iter().enumerate() {
-            columns[j].push(*elem);
-        }
-    }
-    columns
-}
-
 fn count_visible(map: &Map) -> usize {
-    let mut visible = 0;
     let cols = map[0].len();
     let mut visible_map: Vec<Vec<bool>> = (0..map.len()).map(|_| vec![false; cols]).collect();
 
@@ -63,10 +52,9 @@ fn count_visible(map: &Map) -> usize {
         }
     }
 
-
-    visible = visible_map.iter()
+    let visible = visible_map.iter()
     .map(|row| row.iter()
-        .map(|&b| if b {1} else {0} as usize)
+        .map(|&b| b as usize)
         .sum::<usize>()
     )
     .sum();
