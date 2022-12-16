@@ -1,4 +1,4 @@
-use std::{collections::HashMap, fs::read_to_string, ops::{Add, Sub}, ptr::eq, borrow::Borrow};
+use std::{collections::HashMap, fs::read_to_string};
 
 #[derive(Clone)]
 enum Operation {
@@ -84,7 +84,7 @@ impl Monkey {
 fn parse_monkeys(path: &str) -> Vec<Monkey> {
     let input = read_to_string(path).unwrap();
     let mut monkeys = Vec::new();
-    for (i, monkey_info) in input.split("\n\n").enumerate() {
+    for monkey_info in input.split("\n\n") {
         let monkey = Monkey::parse(monkey_info);
         monkeys.push( monkey);
     }
@@ -96,7 +96,7 @@ fn parse_monkeys(path: &str) -> Vec<Monkey> {
 fn run_n_rounds(monkeys: Vec<Monkey>, n: usize, divide_by_three: bool) -> Vec<Monkey> {
     let mut monkeys = monkeys.clone();
     let common_multiple: u64 = monkeys.iter().map(|m| m.test).product();
-    for i in 0..n {
+    for _ in 0..n {
         for m in 0..monkeys.len() {
             let mut items: Vec<Vec<u64>> = (0..monkeys.len()).map(|_| Vec::new()).collect();
             let monkey = &mut monkeys[m];
