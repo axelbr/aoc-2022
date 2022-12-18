@@ -117,20 +117,19 @@ fn main() {
     let mut signals: Vec<Signal> = input.iter()
     .flat_map(|t| [t.0.clone(), t.1.clone()].to_vec())
     .collect();
-    let divider_packet_1 = Signal::List([Signal::List([Signal::Number(2)].to_vec())].to_vec());
-    let divider_packet_2 = Signal::List([Signal::List([Signal::Number(6)].to_vec())].to_vec());
-    signals.append(&mut [divider_packet_1.clone(), divider_packet_2.clone()].to_vec());
 
-
+    signals.push(Signal::parse("[[2]]"));
+    signals.push(Signal::parse("[[6]]"));
     signals.sort_by(|a,b| a.partial_cmp(b).unwrap());
+
     let idx_1: usize = signals.iter()
     .enumerate()
-    .find(|&(_, s)| s == &divider_packet_1)
+    .find(|&(_, s)| *s == Signal::parse("[[2]]"))
     .unwrap().0 + 1;
 
     let idx_2 = signals.iter()
     .enumerate()
-    .find(|&(_, s)| s == &divider_packet_2)
+    .find(|&(_, s)| *s == Signal::parse("[[6]]"))
     .unwrap().0 + 1;
 
     println!("[Task 2] Decoder key: {}", idx_1 * idx_2);
