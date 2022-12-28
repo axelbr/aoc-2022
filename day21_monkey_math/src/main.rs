@@ -23,10 +23,9 @@ impl Expr {
     fn contains(&self, name: &str) -> bool {
         match self {
             Self::Constant(n, _) => n == name,
-            Self::Sum(n, a, b) => n == name || a.contains(name) || b.contains(name),
-            Self::Sub(n, a, b) => n == name || a.contains(name) || b.contains(name),
-            Self::Mul(n, a, b) => n == name || a.contains(name) || b.contains(name),
-            Self::Div(n, a, b) => n == name || a.contains(name) || b.contains(name)
+            Self::Sum(n, a, b) | Self::Sub(n, a, b) |Self::Mul(n, a, b) | Self::Div(n, a, b) => {
+                n == name || a.contains(name) || b.contains(name)
+            }
         }
     }
 }
